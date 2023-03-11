@@ -19,5 +19,5 @@ func Interval(initialDelay time.Duration, period time.Duration) Observable[int] 
 }
 
 func Just[T any](items ...T) Observable[T] {
-	panic("???")
+	return newJustObservable[T](items)
 }
