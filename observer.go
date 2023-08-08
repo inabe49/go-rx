@@ -1,4 +1,4 @@
-package rx
+package go_rx
 
 type Observer[T any] interface {
 	OnNext(value T)

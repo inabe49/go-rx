@@ -1,4 +1,4 @@
-package rx
+package go_rx
 
 type Item[T any] interface {
 	IsError() bool

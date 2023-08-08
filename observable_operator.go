@@ -1,4 +1,4 @@
-package rx
+package go_rx
 
 import (
 	"context"
