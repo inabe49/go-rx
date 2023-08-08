@@ -2,14 +2,16 @@ package rx
 
 import "sync"
 
+// Subscription : 購読を管理するためのインターフェース
 type Subscription interface {
-	// IsUnsubscribed :
+	// IsUnsubscribed : 購読が解除済みかどうか
 	IsUnsubscribed() bool
 
-	// Unsubscribe :
+	// Unsubscribe : 購読を解除する
 	Unsubscribe()
 }
 
+// callbackSubscription : 購読解除時にコールバック関数を実行する Subscription
 type callbackSubscription struct {
 	mu             sync.Mutex
 	isUnsubscribed bool
@@ -39,6 +41,7 @@ func (s *callbackSubscription) Unsubscribe() {
 	s.callback()
 }
 
+// newCallbackSubscription : 購読解除時にコールバック関数を実行する Subscription を生成する
 func newCallbackSubscription(callback func()) *callbackSubscription {
 	return &callbackSubscription{
 		isUnsubscribed: false,
@@ -46,6 +49,7 @@ func newCallbackSubscription(callback func()) *callbackSubscription {
 	}
 }
 
+// emptySubscription : 空の Subscription
 type emptySubscription struct {
 }
 
@@ -56,6 +60,7 @@ func (s *emptySubscription) IsUnsubscribed() bool {
 func (s *emptySubscription) Unsubscribe() {
 }
 
+// newEmptySubscription : 空の Subscription を生成する
 func newEmptySubscription() *emptySubscription {
 	return &emptySubscription{}
 }
